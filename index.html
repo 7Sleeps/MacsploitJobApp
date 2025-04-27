@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WinSploit - Advanced Execution Environment</title>
+    <title>Hydrotax - Advanced Execution Environment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,7 +140,7 @@
 
         /* Mock UI Styling - Increased Rounding */
         .mock-ui-container { @apply relative mt-16; }
-        .mock-winsploit-window {
+        .mock-hydrotax-window {
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 16px; /* Increased rounding */
@@ -152,49 +152,49 @@
             margin-left: auto; margin-right: auto;
             position: relative; z-index: 1;
         }
-        .mock-winsploit-header {
+        .mock-hydrotax-header {
             background-color: var(--bg-tertiary);
             padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
             border-bottom: 1px solid var(--border-color); flex-shrink: 0;
             /* Top corners inherit from parent */
         }
-         .mock-winsploit-header::before {
+         .mock-hydrotax-header::before {
              content: ''; display: block;
              width: 12px; height: 12px; background-color: #ff5f57; border-radius: 50%;
              box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #28c940;
              margin-right: auto;
          }
-        .mock-winsploit-title { font-weight: 600; color: var(--text-header); position: absolute; left: 50%; transform: translateX(-50%); }
-        .mock-winsploit-port { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); background-color: var(--bg-secondary); padding: 4px 8px; border-radius: 6px; } /* Rounded port */
-        .mock-winsploit-tabs {
+        .mock-hydrotax-title { font-weight: 600; color: var(--text-header); position: absolute; left: 50%; transform: translateX(-50%); }
+        .mock-hydrotax-port { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); background-color: var(--bg-secondary); padding: 4px 8px; border-radius: 6px; } /* Rounded port */
+        .mock-hydrotax-tabs {
             display: flex; align-items: stretch;
             background-color: var(--bg-primary); padding: 8px 16px 0;
             border-bottom: 1px solid var(--border-color); flex-shrink: 0;
         }
-        .mock-winsploit-tab {
+        .mock-hydrotax-tab {
             padding: 8px 16px; border-radius: 8px 8px 0 0; /* Increased rounding */
             background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-bottom: none;
             margin-right: 4px; margin-bottom: -1px;
             font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
         }
-        .mock-winsploit-tab.active, .mock-winsploit-tab:hover {
+        .mock-hydrotax-tab.active, .mock-hydrotax-tab:hover {
             background-color: var(--bg-secondary);
             color: var(--text-primary);
             border-color: var(--border-color);
         }
-        .mock-winsploit-tab-add {
+        .mock-hydrotax-tab-add {
             padding: 8px 10px; margin-left: 4px; color: var(--text-secondary); cursor: pointer; margin-bottom: -1px;
         }
-        .mock-winsploit-editor {
+        .mock-hydrotax-editor {
             flex-grow: 1; background-color: var(--bg-secondary);
             padding: 16px; font-family: 'JetBrains Mono', monospace;
             color: #c9d1d9; font-size: 0.9rem; line-height: 1.7;
             overflow: auto;
             /* Bottom corners inherit from parent */
         }
-        .mock-winsploit-editor-line-number { color: #484f58; margin-right: 16px; user-select: none; text-align: right; display: inline-block; width: 2ch; }
-        .mock-winsploit-footer {
+        .mock-hydrotax-editor-line-number { color: #484f58; margin-right: 16px; user-select: none; text-align: right; display: inline-block; width: 2ch; }
+        .mock-hydrotax-footer {
             background-color: var(--bg-tertiary); padding: 10px 16px;
             border-top: 1px solid var(--border-color); flex-shrink: 0;
             display: flex; align-items: center; gap: 12px;
@@ -263,7 +263,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <a href="#" onclick="showPage('home'); return false;" class="text-xl font-bold text-white flex items-center gap-2">
                  <i class="fa-solid fa-terminal text-xl text-[var(--accent-color)]"></i>
-                Winsploit
+                Hydrotax
             </a>
             <nav>
                 <ul class="flex items-center space-x-1 md:space-x-2">
@@ -284,7 +284,7 @@
              <div class="hero-section container mx-auto px-6 md:px-10 lg:px-16 relative z-10 flex flex-col justify-center items-center text-center">
                  <div class="animate-on-scroll fade-in">
                      <h1 class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent pb-2">Execute with Precision.</h1>
-                     <p>Winsploit provides a secure, high-performance environment for developers requiring controlled script execution and analysis.</p>
+                     <p>Hydrotax provides a secure, high-performance environment for developers requiring controlled script execution and analysis.</p>
                      <div class="space-x-4">
                          <a href="#" onclick="showPage('pricing'); return false;" class="btn btn-primary">View Pricing</a>
                          <a href="#" onclick="showPage('docs'); return false;" class="btn btn-secondary">Read the Docs</a>
@@ -294,7 +294,7 @@
                  <div class="mock-ui-container animate-on-scroll scale-in" style="animation-delay: 0.2s;">
                      <div class="mock-hydrotax-window">
                          <div class="mock-hydrotax-header">
-                             <span class="mock-hydrotax-title">WinSploit</span>
+                             <span class="mock-hydrotax-title">Hydrotax</span>
                              <span class="mock-hydrotax-port">Port: 7777</span>
                          </div>
                          <div class="mock-hydrotax-tabs">
@@ -303,7 +303,7 @@
                              <div class="mock-hydrotax-tab-add" title="New Tab"><i class="fa-solid fa-plus"></i></div>
                          </div>
                          <div class="mock-hydrotax-editor">
-                             <div><span class="mock-hydrotax-editor-line-number">1</span><span style="color: #ff7b72;">-- WinSploit Execution Environment</span></div>
+                             <div><span class="mock-hydrotax-editor-line-number">1</span><span style="color: #ff7b72;">-- Hydrotax Execution Environment</span></div>
                              <div><span class="mock-hydrotax-editor-line-number">2</span><span style="color: #ff7b72;">-- Target Port: 7777</span></div>
                              <div><span class="mock-hydrotax-editor-line-number">3</span></div>
                              <div><span class="mock-hydrotax-editor-line-number">4</span><span style="color: #d2a8ff;">local</span> logger = <span style="color: #79c0ff;">require</span>(<span style="color: #a5d6ff;">'hydrotax.logger'</span>)</div>
@@ -343,7 +343,7 @@
                  <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.2s;">
                      <i class="fa-solid fa-code-branch"></i>
                      <h3>Extensible API</h3>
-                     <p>Integrate WinSploit into your workflows with a comprehensive API for automation and control.</p>
+                     <p>Integrate Hydrotax into your workflows with a comprehensive API for automation and control.</p>
                  </div>
                  <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.3s;">
                      <i class="fa-solid fa-network-wired"></i>
@@ -365,14 +365,14 @@
         <section id="pricing-page" class="page-section container mx-auto px-6 md:px-10 lg:px-16 text-center">
               <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-white animate-on-scroll fade-in">Simple Pricing</h2>
               <p class="text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto animate-on-scroll fade-in" style="animation-delay: 0.1s;">
-                  Pay only for what you use. Get started with Winsploit's powerful execution environment today.
+                  Pay only for what you use. Get started with Hydrotax's powerful execution environment today.
               </p>
               <div class="max-w-md mx-auto pricing-card animate-on-scroll scale-in" style="animation-delay: 0.2s;">
                   <i class="fa-solid fa-rocket text-5xl text-[var(--accent-color)] mb-6"></i>
                   <div class="pricing-tag">$199</div>
                   <div class="pricing-unit">Per Execution Credit</div>
                   <p class="mt-4 text-zinc-400 mb-8">
-                      Each credit allows for a single, complete run of your script within the WinSploit environment. Purchase credits as needed.
+                      Each credit allows for a single, complete run of your script within the Hydrotax environment. Purchase credits as needed.
                   </p>
                   <a href="#" class="btn btn-primary w-full text-lg" onclick="alert('Integration with a payment provider (e.g., Stripe, Paddle) would go here.'); return false;">
                       Purchase Credits
