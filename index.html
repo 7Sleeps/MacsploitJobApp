@@ -3,600 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydrotax - Advanced Execution Environment</title>
+    <title>Careers - Raptor Development LLC</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Apply Base Fonts */
-        html { scroll-behavior: smooth; }
+        /* Apply Inter font globally */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* GitHub Dark Base */
-            color: #c9d1d9; /* GitHub Dark Text */
-            overflow-x: hidden;
+            /* Darker background */
+            background-color: #0D1117; /* Very dark gray, similar to GitHub dark */
+            color: #e2e8f0; /* Tailwind text-gray-200 - Adjusted for darker bg */
+            scroll-behavior: smooth; /* Add smooth scroll globally */
         }
-        code, pre, .font-mono {
-            font-family: 'JetBrains Mono', monospace;
+        /* Custom gradient for accents */
+        .raptor-gradient-text {
+            background: linear-gradient(to right, #8B5CF6, #3B82F6); /* Purple-500 to Blue-500 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
-        /* Accent Color & Theme Variables */
-        :root {
-            --accent-color: #2563eb; /* blue-600 */
-            --accent-color-hover: #1d4ed8; /* blue-700 */
-            --accent-glow: rgba(37, 99, 235, 0.4); /* blue-600 glow */
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #c9d1d9;
-            --text-secondary: #8b949e;
-            --text-header: #f0f6fc;
-            --border-color: #30363d;
+        .raptor-gradient-bg {
+            background: linear-gradient(to right, #8B5CF6, #3B82F6); /* Purple-500 to Blue-500 */
         }
 
-        /* Custom Button Styles - More Rounded */
-        .btn {
-            @apply inline-block px-7 py-3 rounded-xl font-semibold transition duration-200 ease-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--bg-primary)] transform hover:-translate-y-0.5; /* Increased rounding */
+        /* Smoother Hero Animation */
+        @keyframes smoothFadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
-            box-shadow: 0 4px 12px 0 var(--accent-glow);
-        }
-        .btn-primary:hover {
-             background-color: var(--accent-color-hover);
-             box-shadow: 0 6px 18px 0 var(--accent-glow);
-        }
-        .btn-primary:focus {
-             @apply ring-[var(--accent-color)];
-        }
-        .btn-secondary {
-            background-color: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-         .btn-secondary:hover {
-            background-color: #30363d;
-            color: white;
-         }
-         .btn-secondary:focus {
-             @apply ring-gray-500;
-         }
-
-
-        /* Header Styling - Non-Sticky */
-        header {
-            /* Ensure it's relative and part of normal flow */
-            @apply relative py-4 px-6 md:px-10 lg:px-16 bg-[var(--bg-primary)] border-b border-[var(--border-color)];
-        }
-        header nav a {
-            @apply text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition duration-150 px-3 py-2 rounded-lg text-sm font-medium; /* Rounded nav links */
-        }
-        header nav a.active-link {
-            @apply bg-[var(--bg-secondary)] text-[var(--text-header)];
+        .smooth-fade-in-up {
+            animation: smoothFadeInUp 1s ease-out forwards;
         }
 
-        /* Page Section Styling */
-        .page-section {
-            display: none;
-            /* Padding top adjusted to account for header height */
-            padding: 5rem 1rem 5rem;
-            min-height: calc(100vh - 68px); /* Adjust based on actual header height if needed */
-            animation: fadeInPage 0.6s ease-out forwards;
-            opacity: 0;
+        /* Smoother Pulse/Float Animation for Background Shapes */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .page-section.active {
-            display: block;
-            opacity: 1;
+        .animate-gentle-float {
+            animation: gentleFloat 4s ease-in-out infinite;
         }
-         /* Home page hero specific padding - ensures it starts below header */
-         #home-page .hero-section {
-             padding-top: 5rem;
-             padding-bottom: 5rem;
-             min-height: calc(100vh - 68px); /* Ensure hero takes enough space below header*/
+
+        /* Ensure smooth transitions on hoverable elements */
+        .smooth-transition {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Darker section/card backgrounds */
+        .dark-card-bg {
+             background-color: #161B22; /* Slightly lighter dark gray */
+        }
+        .darker-bg {
+             background-color: #0D1117;
+        }
+         .dark-header-bg {
+             background-color: #161B22; /* Dark background for header */
          }
 
-        /* Page fade-in animation */
-        @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Scroll Animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-        }
-        /* Initial states */
-        .animate-on-scroll.fade-in { animation-delay: 0.1s; }
-        .animate-on-scroll.slide-up { transform: translateY(30px); animation-delay: 0.1s; }
-        .animate-on-scroll.scale-in { transform: scale(0.95); animation-delay: 0.1s; }
-
-
-        /* Hero Section Specifics */
-        .hero-background-grid {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                radial-gradient(circle at center center, transparent 0%, var(--bg-primary) 80%),
-                linear-gradient(to right, var(--bg-tertiary) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--bg-tertiary) 1px, transparent 1px);
-            background-size: cover, 50px 50px, 50px 50px;
-            opacity: 0.3;
-            z-index: 0;
-        }
-        #home-page h1 {
-            @apply text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-5 leading-tight text-white tracking-tighter;
-        }
-        #home-page p {
-            @apply text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto;
-        }
-
-        /* Mock UI Styling - Increased Rounding */
-        .mock-ui-container { @apply relative mt-16; }
-        .mock-hydrotax-window {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 16px; /* Increased rounding */
-            box-shadow: 0 20px 45px -10px rgba(0,0,0,0.4);
-            overflow: hidden;
-            display: flex; flex-direction: column;
-            min-height: 450px;
-            max-width: 900px;
-            margin-left: auto; margin-right: auto;
-            position: relative; z-index: 1;
-        }
-        .mock-hydrotax-header {
-            background-color: var(--bg-tertiary);
-            padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 1px solid var(--border-color); flex-shrink: 0;
-            /* Top corners inherit from parent */
-        }
-         .mock-hydrotax-header::before {
-             content: ''; display: block;
-             width: 12px; height: 12px; background-color: #ff5f57; border-radius: 50%;
-             box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #28c940;
-             margin-right: auto;
-         }
-        .mock-hydrotax-title { font-weight: 600; color: var(--text-header); position: absolute; left: 50%; transform: translateX(-50%); }
-        .mock-hydrotax-port { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); background-color: var(--bg-secondary); padding: 4px 8px; border-radius: 6px; } /* Rounded port */
-        .mock-hydrotax-tabs {
-            display: flex; align-items: stretch;
-            background-color: var(--bg-primary); padding: 8px 16px 0;
-            border-bottom: 1px solid var(--border-color); flex-shrink: 0;
-        }
-        .mock-hydrotax-tab {
-            padding: 8px 16px; border-radius: 8px 8px 0 0; /* Increased rounding */
-            background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-bottom: none;
-            margin-right: 4px; margin-bottom: -1px;
-            font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
-        .mock-hydrotax-tab.active, .mock-hydrotax-tab:hover {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border-color: var(--border-color);
-        }
-        .mock-hydrotax-tab-add {
-            padding: 8px 10px; margin-left: 4px; color: var(--text-secondary); cursor: pointer; margin-bottom: -1px;
-        }
-        .mock-hydrotax-editor {
-            flex-grow: 1; background-color: var(--bg-secondary);
-            padding: 16px; font-family: 'JetBrains Mono', monospace;
-            color: #c9d1d9; font-size: 0.9rem; line-height: 1.7;
-            overflow: auto;
-            /* Bottom corners inherit from parent */
-        }
-        .mock-hydrotax-editor-line-number { color: #484f58; margin-right: 16px; user-select: none; text-align: right; display: inline-block; width: 2ch; }
-        .mock-hydrotax-footer {
-            background-color: var(--bg-tertiary); padding: 10px 16px;
-            border-top: 1px solid var(--border-color); flex-shrink: 0;
-            display: flex; align-items: center; gap: 12px;
-             /* Bottom corners inherit from parent */
-        }
-        .mock-hydrotax-button {
-            font-size: 0.85rem; font-weight: 500; color: var(--text-primary);
-            background-color: var(--bg-secondary); border: 1px solid var(--border-color);
-            padding: 6px 12px; border-radius: 8px; /* Increased rounding */
-            cursor: pointer; display: flex; align-items: center; gap: 6px;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-        .mock-hydrotax-button:hover { background-color: #30363d; border-color: #484f58; }
-        .mock-hydrotax-button i { font-size: 0.9em; color: var(--text-secondary); }
-        .mock-hydrotax-button.exec { background-color: var(--accent-color); border-color: var(--accent-color); color: white; }
-        .mock-hydrotax-button.exec:hover { background-color: var(--accent-color-hover); border-color: var(--accent-color-hover); }
-        .mock-hydrotax-button.exec i { color: rgba(255,255,255,0.8); }
-
-        /* Features Section Styling */
-        .feature-card {
-            @apply bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-tertiary)] p-8 rounded-2xl shadow-lg border border-[var(--border-color)] transition duration-300 transform hover:-translate-y-1.5 hover:shadow-[0_0_25px_var(--accent-glow)]; /* Increased rounding */
-        }
-        .feature-card i { @apply text-3xl mb-5 text-[var(--accent-color)]; }
-        .feature-card h3 { @apply text-xl font-semibold mb-3 text-white; }
-        .feature-card p { @apply text-zinc-300 leading-relaxed; }
-
-        /* Pricing Section */
-        .pricing-card {
-             @apply bg-[var(--bg-secondary)] p-8 rounded-2xl shadow-xl border border-[var(--border-color)] flex flex-col items-center; /* Increased rounding */
-        }
-        .pricing-tag { @apply text-4xl font-extrabold text-white mb-2; }
-        .pricing-unit { @apply text-sm font-medium text-[var(--text-secondary)] mb-6; }
-
-        /* Docs Page Styling */
-        #docs-page h3 { @apply text-2xl font-semibold mb-4 mt-8 border-l-4 border-[var(--accent-color)] pl-4 text-white; }
-        #docs-page h4 { @apply text-xl font-semibold mt-6 mb-3 text-[var(--accent-color)]; opacity: 0.9; }
-        #docs-page p { @apply mb-4 text-zinc-300 leading-relaxed; }
-        #docs-page code:not(pre code) { @apply bg-[var(--bg-tertiary)] text-[#79c0ff] px-2 py-0.5 rounded-lg text-sm font-medium border border-[var(--border-color)]; } /* Rounded inline code */
-        #docs-page pre { @apply bg-[var(--bg-secondary)] p-4 rounded-xl overflow-x-auto text-sm border border-[var(--border-color)] mb-4 shadow-inner; } /* Rounded pre */
-        #docs-page pre code { @apply bg-transparent p-0 text-zinc-300; }
-        #docs-page ul { @apply list-disc list-inside mb-4 pl-4 text-zinc-300 space-y-1; }
-        #docs-page ol { @apply list-decimal list-inside mb-4 pl-4 text-zinc-300 space-y-1; }
-        #docs-page a { @apply text-[#58a6ff] hover:underline; }
-        #docs-page strong { @apply text-white font-semibold; }
-
-        /* Legal Pages Styling */
-        .legal-page h3 { @apply text-2xl font-semibold mb-4 mt-8 text-white; }
-        .legal-page h4 { @apply text-xl font-semibold mt-6 mb-3 text-[var(--accent-color)]; opacity: 0.9; }
-        .legal-page p { @apply mb-4 text-zinc-300 leading-relaxed; }
-        .legal-page ul { @apply list-disc list-inside mb-4 pl-4 text-zinc-300 space-y-1; }
-        .legal-page a { @apply text-[#58a6ff] hover:underline; }
-
-        /* Footer */
-        footer {
-            @apply py-10 px-6 md:px-10 lg:px-16 bg-[var(--bg-primary)] border-t border-[var(--border-color)] mt-16;
-        }
-        footer a {
-            @apply text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition duration-200;
-        }
+         /* Adjust text colors for contrast */
+         .text-main { color: #e2e8f0; } /* text-gray-200 */
+         .text-secondary { color: #94a3b8; } /* text-slate-400 */
+         .text-muted { color: #64748b; } /* text-slate-500 */
+         .text-link { color: #60a5fa; } /* text-blue-400 */
+         .text-link-hover { color: #93c5fd; } /* text-blue-300 */
 
     </style>
 </head>
-<body class="antialiased">
+<body class="darker-bg text-main">
 
-    <header>
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" onclick="showPage('home'); return false;" class="text-xl font-bold text-white flex items-center gap-2">
-                 <i class="fa-solid fa-terminal text-xl text-[var(--accent-color)]"></i>
-                Hydrotax
-            </a>
-            <nav>
-                <ul class="flex items-center space-x-1 md:space-x-2">
-                    <li><a href="#" onclick="showPage('home'); return false;" class="nav-link">Home</a></li>
-                    <li><a href="#" onclick="showPage('features'); return false;" class="nav-link">Features</a></li>
-                    <li><a href="#" onclick="showPage('pricing'); return false;" class="nav-link">Pricing</a></li>
-                    <li><a href="#" onclick="showPage('docs'); return false;" class="nav-link">Docs</a></li>
-                    <li><a href="#" onclick="showPage('get'); return false;" class="btn btn-primary ml-3 text-sm py-2 px-5 rounded-lg">Get Access</a></li>
-                 </ul>
-            </nav>
-        </div>
+    <header class="dark-header-bg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                    RD
+                </div>
+                <span class="text-2xl font-bold text-white">Raptor Development</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="text-secondary hover:text-white smooth-transition">Home</a>
+                <a href="#positions" class="text-secondary hover:text-white smooth-transition">Open Positions</a>
+                <a href="#about" class="text-secondary hover:text-white smooth-transition">About Us</a>
+                <a href="#contact" class="text-secondary hover:text-white smooth-transition">Contact Us</a> </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-secondary hover:text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden dark-header-bg px-6 pb-4 space-y-2">
+            <a href="#home" class="block text-secondary hover:text-white smooth-transition py-2">Home</a>
+            <a href="#positions" class="block text-secondary hover:text-white smooth-transition py-2">Open Positions</a>
+            <a href="#about" class="block text-secondary hover:text-white smooth-transition py-2">About Us</a>
+            <a href="#contact" class="block text-secondary hover:text-white smooth-transition py-2">Contact Us</a> </div>
     </header>
 
-    <main>
-        <section id="home-page" class="page-section"> {/* Removed relative/overflow */}
-             <div class="hero-background-grid"></div>
-             {/* Adjusted hero padding in CSS */}
-             <div class="hero-section container mx-auto px-6 md:px-10 lg:px-16 relative z-10 flex flex-col justify-center items-center text-center">
-                 <div class="animate-on-scroll fade-in">
-                     <h1 class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent pb-2">Execute with Precision.</h1>
-                     <p>Hydrotax provides a secure, high-performance environment for developers requiring controlled script execution and analysis.</p>
-                     <div class="space-x-4">
-                         <a href="#" onclick="showPage('pricing'); return false;" class="btn btn-primary">View Pricing</a>
-                         <a href="#" onclick="showPage('docs'); return false;" class="btn btn-secondary">Read the Docs</a>
-                     </div>
-                 </div>
+    <section id="home" class="relative pt-24 pb-32 flex items-center justify-center text-center darker-bg overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-gray-900/20 to-black opacity-40 z-0"></div>
+        <div class="absolute top-1/4 left-1/4 w-16 h-16 bg-purple-600 rounded-full opacity-10 animate-gentle-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-20 h-20 bg-blue-600 rounded-lg opacity-10 animate-gentle-float" style="animation-delay: -2s;"></div>
 
-                 <div class="mock-ui-container animate-on-scroll scale-in" style="animation-delay: 0.2s;">
-                     <div class="mock-hydrotax-window">
-                         <div class="mock-hydrotax-header">
-                             <span class="mock-hydrotax-title">Hydrotax</span>
-                             <span class="mock-hydrotax-port">Port: 7777</span>
-                         </div>
-                         <div class="mock-hydrotax-tabs">
-                             <div class="mock-hydrotax-tab active">Script Tab - 1</div>
-                             <div class="mock-hydrotax-tab">Script Tab - 2</div>
-                             <div class="mock-hydrotax-tab-add" title="New Tab"><i class="fa-solid fa-plus"></i></div>
-                         </div>
-                         <div class="mock-hydrotax-editor">
-                             <div><span class="mock-hydrotax-editor-line-number">1</span><span style="color: #ff7b72;">-- Hydrotax Execution Environment</span></div>
-                             <div><span class="mock-hydrotax-editor-line-number">2</span><span style="color: #ff7b72;">-- Target Port: 7777</span></div>
-                             <div><span class="mock-hydrotax-editor-line-number">3</span></div>
-                             <div><span class="mock-hydrotax-editor-line-number">4</span><span style="color: #d2a8ff;">local</span> logger = <span style="color: #79c0ff;">require</span>(<span style="color: #a5d6ff;">'hydrotax.logger'</span>)</div>
-                             <div><span class="mock-hydrotax-editor-line-number">5</span><span style="color: #d2a8ff;">local</span> network = <span style="color: #79c0ff;">require</span>(<span style="color: #a5d6ff;">'hydrotax.network'</span>)</div>
-                             <div><span class="mock-hydrotax-editor-line-number">6</span></div>
-                             <div><span class="mock-hydrotax-editor-line-number">7</span>logger.<span style="color: #ffa657;">info</span>(<span style="color: #a5d6ff;">"Initializing connection..."</span>)</div>
-                             <div><span class="mock-hydrotax-editor-line-number">8</span><span style="color: #d2a8ff;">local</span> success, err = network.<span style="color: #ffa657;">connect</span>(<span style="color: #79c0ff;">7777</span>)</div>
-                             <div><span class="mock-hydrotax-editor-line-number">9</span><span style="color: #d2a8ff;">if not</span> success <span style="color: #d2a8ff;">then</span></div>
-                             <div><span class="mock-hydrotax-editor-line-number">10</span> &nbsp;&nbsp;logger.<span style="color: #ffa657;">error</span>(<span style="color: #a5d6ff;">"Connection failed: "</span> .. err)</div>
-                             <div><span class="mock-hydrotax-editor-line-number">11</span><span style="color: #d2a8ff;">end</span></div>
-                         </div>
-                         <div class="mock-hydrotax-footer">
-                             <button class="mock-hydrotax-button exec"><i class="fa-solid fa-play"></i> Execute</button>
-                             <button class="mock-hydrotax-button"><i class="fa-regular fa-folder-open"></i> Open File</button>
-                             <button class="mock-hydrotax-button"><i class="fa-regular fa-save"></i> Save File</button>
-                             <button class="mock-hydrotax-button"><i class="fa-solid fa-paperclip"></i> Attach</button>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-        </section>
-
-        <section id="features-page" class="page-section container mx-auto px-6 md:px-10 lg:px-16">
-             <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-white animate-on-scroll fade-in">Core Features</h2>
-             <p class="text-lg text-zinc-300 text-center mb-16 max-w-2xl mx-auto animate-on-scroll fade-in" style="animation-delay: 0.1s;">Built for performance, security, and developer control.</p>
-             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                 <div class="feature-card animate-on-scroll slide-up">
-                     <i class="fa-solid fa-bolt"></i>
-                     <h3>High-Performance</h3>
-                     <p>Optimized execution core designed for speed and efficiency, handling complex scripts with ease.</p>
-                 </div>
-                 <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.1s;">
-                     <i class="fa-solid fa-shield-halved"></i>
-                     <h3>Secure Sandbox</h3>
-                     <p>Scripts run in an isolated environment, preventing unintended system access and ensuring stability.</p>
-                 </div>
-                 <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.2s;">
-                     <i class="fa-solid fa-code-branch"></i>
-                     <h3>Extensible API</h3>
-                     <p>Integrate Hydrotax into your workflows with a comprehensive API for automation and control.</p>
-                 </div>
-                 <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.3s;">
-                     <i class="fa-solid fa-network-wired"></i>
-                     <h3>Network Interaction</h3>
-                     <p>Tools for controlled network communication simulation and analysis within the execution context.</p>
-                 </div>
-                  <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.4s;">
-                     <i class="fa-solid fa-file-lines"></i>
-                     <h3>Detailed Logging</h3>
-                     <p>Comprehensive logging of execution steps, outputs, and errors for thorough analysis and debugging.</p>
-                 </div>
-                  <div class="feature-card animate-on-scroll slide-up" style="animation-delay: 0.5s;">
-                     <i class="fa-solid fa-microchip"></i>
-                     <h3>Resource Management</h3>
-                     <p>Monitor and control resource usage (CPU, memory) during script execution.</p>
-                 </div>
-             </div>
-        </section>
-        <section id="pricing-page" class="page-section container mx-auto px-6 md:px-10 lg:px-16 text-center">
-              <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-white animate-on-scroll fade-in">Simple Pricing</h2>
-              <p class="text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto animate-on-scroll fade-in" style="animation-delay: 0.1s;">
-                  Pay only for what you use. Get started with Hydrotax's powerful execution environment today.
-              </p>
-              <div class="max-w-md mx-auto pricing-card animate-on-scroll scale-in" style="animation-delay: 0.2s;">
-                  <i class="fa-solid fa-rocket text-5xl text-[var(--accent-color)] mb-6"></i>
-                  <div class="pricing-tag">$199</div>
-                  <div class="pricing-unit">Per Execution Credit</div>
-                  <p class="mt-4 text-zinc-400 mb-8">
-                      Each credit allows for a single, complete run of your script within the Hydrotax environment. Purchase credits as needed.
-                  </p>
-                  <a href="#" class="btn btn-primary w-full text-lg" onclick="alert('Integration with a payment provider (e.g., Stripe, Paddle) would go here.'); return false;">
-                      Purchase Credits
-                  </a>
-              </div>
-              <p class="mt-8 text-sm text-zinc-500 animate-on-scroll fade-in" style="animation-delay: 0.3s;">Volume discounts available for bulk purchases. <a href="#" class="text-[var(--accent-color)] hover:underline">Contact Sales</a>.</p>
-        </section>
-        <section id="docs-page" class="page-section container mx-auto px-6 md:px-10 lg:px-16 max-w-4xl">
-             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll fade-in">Documentation</h2>
-             <div class="animate-on-scroll fade-in">
-                 <h3>Introduction</h3>
-                 <p>Welcome to the Hydrotax documentation. This guide provides essential information for developers using the Hydrotax execution environment.</p>
-                 <h3>Getting Started</h3>
-                 <h4>Prerequisites</h4>
-                 <p>Ensure you have a compatible system (details provided upon purchase) and have acquired execution credits from the <a href="#" onclick="showPage('pricing'); return false;">Pricing</a> page.</p>
-                 <h4>Installation & Setup</h4>
-                 <p>Download the Hydrotax client application using the link provided after purchasing credits. Follow the platform-specific installation instructions. You will need to configure the client with your API key (found in your account dashboard) for authentication.</p>
-                 <pre><code class="language-bash"># Example CLI configuration (replace with actual command)
- hydrotax config --api-key YOUR_API_KEY_HERE</code></pre>
-                 <h4>Your First Execution</h4>
-                 <p>Prepare your script (e.g., `my_script.lua`). Use the Hydrotax client or API to submit it for execution. Each submission consumes one execution credit.</p>
-                  <pre><code class="language-bash"># Example CLI execution
- hydrotax execute --script my_script.lua --port 7777</code></pre>
-                  <p>The command will return an execution ID. You can use this ID to retrieve logs and results via the client or API.</p>
-                  <pre><code class="language-bash"># Example CLI log retrieval
- hydrotax logs --id EXECUTION_ID_HERE</code></pre>
-             </div>
-              <div class="animate-on-scroll fade-in mt-8">
-                 <h3>API Reference (Conceptual)</h3>
-                 <p>Hydrotax provides a RESTful API and potentially language-specific SDKs for programmatic interaction.</p>
-                 <h4>Authentication</h4>
-                 <p>All API requests must include your API key, typically via an `Authorization: Bearer YOUR_API_KEY` header.</p>
-                 <h4>Endpoints</h4>
-                 <ul>
-                     <li><code>POST /v1/executions</code>: Submit a script for execution. Requires script content, configuration parameters (like port). Returns an `executionId`.</li>
-                     <li><code>GET /v1/executions/{id}</code>: Get the status of an execution (pending, running, completed, failed).</li>
-                     <li><code>GET /v1/executions/{id}/logs</code>: Retrieve the logs for a completed or running execution.</li>
-                     <li><code>GET /v1/executions/{id}/results</code>: Retrieve any defined results or artifacts from a completed execution.</li>
-                     <li><code>GET /v1/credits</code>: Check your remaining execution credit balance.</li>
-                 </ul>
-                 <h4>Scripting Environment API (Inside Execution)</h4>
-                 <p>Scripts running within Hydrotax have access to a specific API (e.g., Lua modules) for interacting with the environment:</p>
-                  <pre><code class="language-lua">-- Example Lua script using Hydrotax API
- local htx = require('hydrotax')
-
- htx.log.info("Script started.")
-
- -- Example: Interact with simulated network on configured port
- local connection = htx.network.connect(htx.config.port)
- if connection then
-   connection:send("DATA_PACKET")
-   local response = connection:receive()
-   htx.log.debug("Received: " .. response)
-   connection:close()
- end
-
- -- Example: Define a result artifact
- htx.results.set("output_data", { success = true, value = 42 })
-
- htx.log.info("Script finished.")</code></pre>
-              </div>
-              <p class="mt-6 text-sm text-zinc-400">Note: This is a conceptual overview. Detailed API specifications and SDKs would be provided with the actual service.</p>
-        </section>
-        <section id="privacy-page" class="page-section legal-page container mx-auto px-6 md:px-10 lg:px-16 max-w-4xl">
-              <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll fade-in">Privacy Policy</h2>
-              <p class="text-sm text-zinc-500 text-center -mt-12 mb-12 animate-on-scroll fade-in">Last Updated: April 26, 2025</p>
-              <div class="animate-on-scroll fade-in">
-                  <h3>Introduction</h3>
-                  <p>Hydrotax ("we", "us", "our") respects the privacy of our users ("user", "you"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our execution environment service and associated client applications (collectively, the "Service"). Please read this privacy policy carefully.</p>
-                  {/* Rest of Privacy Policy content... */}
-                   <h3>Information We Collect</h3>
-                   <h4>Account Information</h4><p>...</p>
-                   <h4>Execution Data</h4><p>...</p>
-                   <h4>Usage Data</h4><p>...</p>
-                   <h4>Client Application Data</h4><p>...</p>
-                   <h3>How We Use Your Information</h3><ul><li>...</li></ul>
-                   <h3>Sharing Your Information</h3>
-                   <h4>By Law or to Protect Rights</h4><p>...</p>
-                   <h4>Third-Party Service Providers</h4><p>...</p>
-                   <h4>Business Transfers</h4><p>...</p>
-                   <h3>Data Security</h3><p>...</p>
-                   <h3>Data Retention</h3><p>...</p>
-                   <h3>Your Rights</h3><p>...</p>
-                   <h3>Contact Us</h3>
-                   <p>If you have questions about this Privacy Policy, please contact us at: privacy@hydrotax-example.com (Replace with actual email)</p>
-              </div>
-        </section>
-        <section id="tos-page" class="page-section legal-page container mx-auto px-6 md:px-10 lg:px-16 max-w-4xl">
-             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll fade-in">Terms of Service</h2>
-             <p class="text-sm text-zinc-500 text-center -mt-12 mb-12 animate-on-scroll fade-in">Last Updated: April 26, 2025</p>
-             <div class="animate-on-scroll fade-in">
-                 <h3>1. Acceptance of Terms</h3><p>...</p>
-                 <h3>2. Service Description</h3><p>...</p>
-                 <h3>3. Account and Credits</h3><p>...</p>
-                 <h3>4. User Responsibilities</h3><ul><li>...</li></ul>
-                 <h3>5. Service Availability and Limitations</h3><p>...</p>
-                 <h3>6. Intellectual Property</h3><p>...</p>
-                 <h3>7. Confidentiality</h3><p>...</p>
-                 <h3>8. Disclaimers</h3><p>...</p>
-                  <h3>9. Limitation of Liability</h3><p>...</p>
-                 <h3>10. Termination</h3><p>...</p>
-                 <h3>11. Governing Law</h3><p>...</p>
-                 <h3>12. Changes to Terms</h3><p>...</p>
-                 <h3>13. Contact Us</h3>
-                 <p>If you have any questions about these Terms, please contact us at: support@hydrotax-example.com (Replace with actual email)</p>
-             </div>
-        </section>
-        <section id="get-page" class="page-section container mx-auto px-6 md:px-10 lg:px-16 text-center">
-              <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-white animate-on-scroll fade-in">Get Access</h2>
-              <p class="text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto animate-on-scroll fade-in" style="animation-delay: 0.1s;">
-                  Ready to start? Purchase execution credits to gain access to the Hydrotax environment and API.
-              </p>
-              <div class="animate-on-scroll scale-in" style="animation-delay: 0.2s;">
-                  <a href="#" onclick="showPage('pricing'); return false;" class="btn btn-primary text-lg">Purchase Credits Now</a>
-              </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container mx-auto text-center text-[var(--text-secondary)]">
-            <div class="mb-4">
-                 <i class="fa-solid fa-terminal text-2xl text-[var(--accent-color)]"></i>
-            </div>
-            <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
-                <a href="#" onclick="showPage('features'); return false;">Features</a>
-                <a href="#" onclick="showPage('pricing'); return false;">Pricing</a>
-                <a href="#" onclick="showPage('docs'); return false;">Docs</a>
-                <a href="#" onclick="showPage('privacy'); return false;">Privacy Policy</a>
-                <a href="#" onclick="showPage('tos'); return false;">Terms of Service</a>
-            </nav>
-            <p class="text-sm">&copy; 2025 Hydrotax. All rights reserved. (Conceptual)</p>
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 smooth-fade-in-up">
+                Build the Future with <span class="raptor-gradient-text">Raptor Development</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary mb-8 smooth-fade-in-up" style="animation-delay: 0.3s;">
+                Join our team of innovators and shape the next generation of technology.
+            </p>
+            <a href="#positions" class="relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white rounded-lg shadow-lg group raptor-gradient-bg hover:shadow-xl smooth-transition smooth-fade-in-up" style="animation-delay: 0.6s;">
+                <span class="relative">View Open Positions</span>
+            </a>
         </div>
+    </section>
+
+    <section id="positions" class="py-20 dark-card-bg"> <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">Current Openings</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="dark-card-bg border border-gray-700 rounded-lg shadow-lg p-6 transform hover:scale-[1.03] smooth-transition"> <h3 class="text-2xl font-semibold text-white mb-3">Senior Frontend Developer</h3>
+                    <p class="text-muted mb-4">Location: Remote | Type: Full-time</p>
+                    <p class="text-secondary mb-5">We're looking for an experienced Frontend Developer to lead the design and implementation of our user interfaces.</p>
+                    <a href="#" class="relative inline-flex items-center justify-center px-5 py-2 overflow-hidden font-medium text-purple-400 border-2 border-purple-500 rounded-lg shadow-md group hover:text-white smooth-transition">
+                         <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                         </span>
+                         <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">Apply Now</span>
+                         <span class="relative invisible">Apply Now</span>
+                    </a>
+                </div>
+
+                <div class="dark-card-bg border border-gray-700 rounded-lg shadow-lg p-6 transform hover:scale-[1.03] smooth-transition"> <h3 class="text-2xl font-semibold text-white mb-3">Backend Engineer (Node.js)</h3>
+                    <p class="text-muted mb-4">Location: Remote | Type: Full-time</p>
+                    <p class="text-secondary mb-5">Join our backend team to build scalable and robust services powering our executor.</p>
+                     <a href="#" class="relative inline-flex items-center justify-center px-5 py-2 overflow-hidden font-medium text-blue-400 border-2 border-blue-500 rounded-lg shadow-md group hover:text-white smooth-transition">
+                         <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-blue-500 group-hover:translate-x-0 ease">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                         </span>
+                         <span class="absolute flex items-center justify-center w-full h-full text-blue-500 transition-all duration-300 transform group-hover:translate-x-full ease">Apply Now</span>
+                         <span class="relative invisible">Apply Now</span>
+                    </a>
+                </div>
+
+                <div class="dark-card-bg border border-gray-700 rounded-lg shadow-lg p-6 transform hover:scale-[1.03] smooth-transition"> <h3 class="text-2xl font-semibold text-white mb-3">UX/UI Designer</h3>
+                    <p class="text-muted mb-4">Location: Remote | Type: Contract</p>
+                    <p class="text-secondary mb-5">Help define the user experience and visual design for our cutting-edge executor.</p>
+                     <a href="#" class="relative inline-flex items-center justify-center px-5 py-2 overflow-hidden font-medium text-purple-400 border-2 border-purple-500 rounded-lg shadow-md group hover:text-white smooth-transition">
+                         <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                         </span>
+                         <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">Apply Now</span>
+                         <span class="relative invisible">Apply Now</span>
+                    </a>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 darker-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Why Join <span class="raptor-gradient-text">Raptor Development</span>?</h2>
+            <p class="text-lg text-secondary max-w-3xl mx-auto mb-10">
+                At Raptor Development, we foster a culture of innovation, collaboration, and continuous learning. We're passionate about technology and empowering our team to create impactful solutions. Join us and be part of something extraordinary.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="dark-card-bg border border-gray-700 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-white mb-3">Innovative Projects</h3>
+                    <p class="text-secondary">Work on challenging and exciting projects using the latest technologies.</p>
+                </div>
+                <div class="dark-card-bg border border-gray-700 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-white mb-3">Collaborative Culture</h3>
+                    <p class="text-secondary">Be part of a supportive team that values open communication and teamwork.</p>
+                </div>
+                <div class="dark-card-bg border border-gray-700 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-white mb-3">Growth Opportunities</h3>
+                    <p class="text-secondary">We invest in our employees' professional development and career growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 dark-card-bg"> <div class="container mx-auto px-6 text-center">
+             <h2 class="text-4xl font-bold text-white mb-6">Get In Touch</h2>
+             <p class="text-lg text-secondary max-w-2xl mx-auto mb-8">
+                Have questions or want to connect with the team? Join our community on Discord!
+             </p>
+             <a href="https://discord.gg/D6QqW5MVXN" target="_blank" rel="noopener noreferrer" class="relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white rounded-lg shadow-lg group raptor-gradient-bg hover:shadow-xl smooth-transition">
+                <i class="fab fa-discord mr-2"></i> <span class="relative">Join our Discord</span>
+            </a>
+             </div>
+    </section>
+
+
+    <footer class="darker-bg py-8">
+        <div class="container mx-auto px-6 text-center text-muted"> <p>&copy; <span id="current-year"></span> Raptor Development. All rights reserved.</p>
+            </div>
     </footer>
 
     <script>
-        // --- Page Navigation Logic ---
-        const pageSections = document.querySelectorAll('.page-section');
-        const navLinks = document.querySelectorAll('header nav a');
-        const getAccessButtons = document.querySelectorAll('a[onclick*="get"]'); // Includes header button
-        // No header height needed as it's not sticky
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        function showPage(pageId) {
-            let targetPageFound = false;
-            pageSections.forEach(section => {
-                section.classList.remove('active');
-                section.style.opacity = '0'; // Ensure reset for animation
-            });
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-            const targetPage = document.getElementById(pageId + '-page');
-            if (targetPage) {
-                targetPage.classList.add('active');
-                targetPageFound = true;
-                triggerScrollAnimations(targetPage); // Trigger animations for the new page
-            }
-
-            // Update active link style in header nav
-            navLinks.forEach(link => {
-                link.classList.remove('active-link');
-                const linkTargetPage = link.getAttribute('onclick')?.match(/showPage\('([^']+)'/)?.[1];
-                if (linkTargetPage === pageId) {
-                    link.classList.add('active-link');
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Close mobile menu if open and clicking a link
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                // Scroll smoothly to the target element
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Use scrollIntoView for smooth scrolling
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
-
-             // Update active state for header's "Get Access" button
-             const isGetPage = (pageId === 'get');
-             getAccessButtons.forEach(button => {
-                 if (button.closest('header')) { // Only target the header button
-                     if (isGetPage) {
-                         button.classList.add('ring-2', 'ring-[var(--accent-color)]'); // Example active style
-                     } else {
-                         button.classList.remove('ring-2', 'ring-[var(--accent-color)]');
-                     }
-                 }
-             });
-
-            // Scroll to top
-             if (targetPageFound) {
-                 requestAnimationFrame(() => {
-                     // Scroll immediately to top since header isn't sticky
-                     window.scrollTo({ top: 0, behavior: 'auto' });
-                 });
-             }
-        }
-
-
-        // --- Scroll Animation Logic (Intersection Observer) ---
-        let observer;
-
-        function triggerScrollAnimations(container) {
-            const elementsToAnimate = container.querySelectorAll('.animate-on-scroll');
-            elementsToAnimate.forEach(el => {
-                el.classList.remove('animated');
-                if (el.classList.contains('slide-up')) el.style.transform = 'translateY(30px)';
-                else if (el.classList.contains('scale-in')) el.style.transform = 'scale(0.95)';
-                else el.style.transform = 'translate(0, 0)';
-                el.style.opacity = '0';
-                observer.observe(el);
-            });
-        }
-
-        function initializeScrollObserver() {
-             observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translate(0, 0) scale(1)';
-                        entry.target.classList.add('animated');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1, // Trigger when 10% is visible
-                rootMargin: '0px 0px -40px 0px' // Adjust trigger point
-            });
-        }
-
-
-        // --- Initial Page Load ---
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeScrollObserver();
-            showPage('home'); // Show home page by default
         });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Optional: Scroll-triggered animations (Intersection Observer)
+        // (Code remains commented out as before)
+        /*
+        ... observer code ...
+        */
 
     </script>
 
